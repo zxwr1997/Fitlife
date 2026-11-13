@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLife - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">FitLife System</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="classes.html">Book Class</a></li>
+            <li><a href="dashboard.html" class="active">My Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <div class="container dashboard">
+        <div class="profile-header">
+            <h2>Welcome back, Member!</h2>
+            <p>Status: <span class="badge">Active</span></p>
+        </div>
+        
+        <div class="dashboard-grid">
+            <div class="card">
+                <h3>My Bookings</h3>
+                <ul id="myBookingsList">
+                    <li>No upcoming classes.</li>
+                </ul>
+            </div>
+            <div class="card qr-card">
+                <h3>Gate Access Pass</h3>
+                <div class="qr-placeholder">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=FitLifeToken123" alt="QR Code">
+                </div>
+                <p class="small-text">Scan at the turnstile for entry</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 FitLife Platform. Designed by Zhou Xiaoweiran.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Load bookings on dashboard load
+        document.addEventListener('DOMContentLoaded', () => {
+            const bookings = JSON.parse(localStorage.getItem('fitlife_bookings') || '[]');
+            const list = document.getElementById('myBookingsList');
+            if(bookings.length > 0) {
+                list.innerHTML = '';
+                bookings.forEach(b => {
+                    list.innerHTML += `<li><strong>${b.name}</strong> - ${b.time} <span class="badge green">Confirmed</span></li>`;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
