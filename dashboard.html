@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member Dashboard & QR Gym Pass | FitLife Fitness</title>
-    <meta name="description" content="Manage your upcoming gym class reservations and access your dynamic QR code gym pass on the FitLife member dashboard.">
+    <title>FitLife - Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,33 +18,34 @@
 
     <div class="container dashboard">
         <div class="profile-header">
-            <h1>FitLife Member Dashboard & Fitness Bookings</h1>
-            <p>Membership Status: <span class="badge">Active</span></p>
+            <h2>Welcome back, Member!</h2>
+            <p>Status: <span class="badge">Active</span></p>
         </div>
         
         <div class="dashboard-grid">
             <div class="card">
-                <h2>My Upcoming Gym Bookings</h2>
+                <h3>My Bookings</h3>
                 <ul id="myBookingsList">
                     <li>No upcoming classes.</li>
                 </ul>
             </div>
             <div class="card qr-card">
-                <h2>Smart QR Code Gym Access Pass</h2>
+                <h3>Gate Access Pass</h3>
                 <div class="qr-placeholder">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=FitLifeToken123" alt="FitLife Member QR Code Gym Access Pass">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=FitLifeToken123" alt="QR Code">
                 </div>
-                <p class="small-text">Scan this digital fitness pass at the turnstile for contactless entry.</p>
+                <p class="small-text">Scan at the turnstile for entry</p>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 FitLife Cloud Fitness Platform. Designed by Zhou Xiaoweiran.</p>
+        <p>&copy; 2026 FitLife Platform. Designed by Zhou Xiaoweiran.</p>
     </footer>
 
     <script src="script.js"></script>
     <script>
+        // Load bookings on dashboard load
         document.addEventListener('DOMContentLoaded', () => {
             const bookings = JSON.parse(localStorage.getItem('fitlife_bookings') || '[]');
             const list = document.getElementById('myBookingsList');

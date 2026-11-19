@@ -31,16 +31,23 @@ function renderClasses() {
 
 function bookClass(id, name, time) {
     let bookings = JSON.parse(localStorage.getItem('fitlife_bookings') || '[]');
+    // Check if already booked
     if(bookings.find(b => b.id === id)) {
         alert("You have already booked this class!");
         return;
     }
+    
+    // Add to pseudo-database (localStorage)
     bookings.push({ id, name, time });
     localStorage.setItem('fitlife_bookings', JSON.stringify(bookings));
+    
     alert(`Successfully reserved: ${name}\nGo to My Dashboard to view your pass.`);
+    
+    // Simulate capacity reduction locally for demo
     const cls = classesData.find(c => c.id === id);
     if(cls) cls.available--;
     renderClasses();
 }
 
+// Init
 document.addEventListener('DOMContentLoaded', renderClasses);
