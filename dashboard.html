@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Member Dashboard & QR Gym Pass | FitLife Fitness</title>
     <meta name="description" content="Manage your upcoming gym class reservations and access your dynamic QR code gym pass on the FitLife member dashboard.">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=4">
     <!-- Yandex.Metrika counter (https://metrika.yandex.ru) -->
     <script type="text/javascript">
         window.YANDEX_METRIKA_ID = 114398340;
@@ -27,7 +27,7 @@
 </head>
 <body data-page="dashboard">
     <nav class="navbar">
-        <div class="logo">FitLife System</div>
+        <div class="logo">FitLife Gym</div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="classes.html">Book Class</a></li>
@@ -36,24 +36,37 @@
     </nav>
 
     <div class="container dashboard">
-        <div class="profile-header">
-            <h1>FitLife Member Dashboard & Fitness Bookings</h1>
+        <div class="profile-header page-banner">
+            <span class="card-tag">FitLife Gym Member Portal</span>
+            <h1>FitLife Member Dashboard &amp; <span class="kw-title">Smart QR Code Gym Access</span></h1>
+            <p class="page-intro">
+                Manage your active <strong class="kw">gym membership</strong>, review your
+                <strong class="kw">online fitness class booking</strong> schedule, and scan your digital pass for contactless entry.
+            </p>
             <p>Membership Status: <span class="badge">Active</span></p>
         </div>
         
         <div class="dashboard-grid">
             <div class="card">
+                <span class="card-tag">Gym Booking History</span>
                 <h2>My Upcoming Gym Bookings</h2>
                 <ul id="myBookingsList">
-                    <li>No upcoming classes.</li>
+                    <li>No upcoming classes. <a href="classes.html" class="inline-link">Book a fitness class now &rarr;</a></li>
                 </ul>
             </div>
             <div class="card qr-card">
+                <span class="card-tag">Contactless Turnstile Pass</span>
                 <h2>Smart QR Code Gym Access Pass</h2>
                 <div class="qr-placeholder">
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=FitLifeToken123" alt="FitLife Member QR Code Gym Access Pass">
                 </div>
-                <p class="small-text">Scan this digital fitness pass at the turnstile for contactless entry.</p>
+                <p class="small-text">
+                    Scan this <strong class="kw">smart QR code gym access</strong> pass at the FitLife Gym turnstile for instant entry.
+                </p>
+                <div class="topic-pills centered-pills">
+                    <span class="topic-pill long static-pill">Smart QR Code Gym Access</span>
+                    <span class="topic-pill short static-pill">Gym Membership</span>
+                </div>
             </div>
         </div>
     </div>
@@ -61,29 +74,37 @@
     <footer>
         <div class="counter-bar" aria-label="Website Visitor Counters">
             <div class="counter-item">
-                <span class="counter-label">Custom JS Counter (Write Your Own):</span>
-                <strong id="customTotalVisits">0</strong> total visits
-                <span class="counter-sub">(<span id="customPageVisits">0</span> on this page)</span>
+                <span class="counter-label">Custom JS Counter:</span>
+                <button type="button" class="counter-pill-btn" onclick="incrementCustomCounter()" title="Click to add +1 visit locally">
+                    <strong id="customTotalVisits">0</strong> visits
+                    <span class="counter-sub">(<span id="customPageVisits">0</span> this page)</span>
+                    <span class="pill-tag">+1</span>
+                </button>
                 <button type="button" class="counter-reset-btn" onclick="resetCustomCounter()">Reset</button>
             </div>
             <div class="counter-item">
                 <span class="counter-label">API Counter (REST API):</span>
-                <strong id="apiGlobalVisits">Loading...</strong> global views
+                <button type="button" class="counter-pill-btn api-btn" id="apiCounterBtn" onclick="hitApiCounter(true)" title="Click to send a live API request (+1 global view)">
+                    <strong id="apiGlobalVisits">Loading...</strong> global views
+                    <span class="pill-tag">+1 API</span>
+                </button>
             </div>
             <div class="counter-item">
-                <span class="counter-label">Yandex.Metrika (metrika.yandex.ru):</span>
-                <strong id="yandexStatus">Active (ID: 114398340)</strong>
+                <span class="counter-label">Yandex.Metrika:</span>
+                <a class="counter-pill-link" id="yandexStatus" href="https://metrika.yandex.ru/dashboard?id=114398340" target="_blank" rel="noopener noreferrer" title="Open Yandex.Metrika Analytics Dashboard">
+                    Active (ID: 114398340) ↗
+                </a>
             </div>
         </div>
         <p>&copy; 2026 FitLife Cloud Fitness Platform. Designed by Zhou Xiaoweiran.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=4"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const bookings = JSON.parse(localStorage.getItem('fitlife_bookings') || '[]');
             const list = document.getElementById('myBookingsList');
-            if(bookings.length > 0) {
+            if (bookings.length > 0) {
                 list.innerHTML = '';
                 bookings.forEach(b => {
                     list.innerHTML += `<li><strong>${b.name}</strong> - ${b.time} <span class="badge green">Confirmed</span></li>`;

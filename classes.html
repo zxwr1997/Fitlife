@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Fitness Classes Online | Yoga, HIIT & Pilates - FitLife</title>
     <meta name="description" content="Explore our live gym class timetable. Reserve morning yoga, HIIT extreme, and core pilates sessions online with real-time seat availability.">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=4">
     <!-- Yandex.Metrika counter (https://metrika.yandex.ru) -->
     <script type="text/javascript">
         window.YANDEX_METRIKA_ID = 114398340;
@@ -27,7 +27,7 @@
 </head>
 <body data-page="classes">
     <nav class="navbar">
-        <div class="logo">FitLife System</div>
+        <div class="logo">FitLife Gym</div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="classes.html" class="active">Book Class</a></li>
@@ -36,8 +36,22 @@
     </nav>
 
     <div class="container">
-        <h1>Available Fitness Classes & Live Gym Timetable</h1>
-        <p style="margin-bottom: 1.5rem; color: #555;">Check real-time seat availability and reserve your next group workout session online.</p>
+        <div class="page-banner">
+            <span class="card-tag">Live Gym Timetable</span>
+            <h1>Available <span class="kw-title">Fitness Classes</span> &amp; <span class="kw-title">Online Fitness Class Booking</span></h1>
+            <p class="page-intro">
+                Check real-time seat availability for <strong class="kw">fitness classes near me</strong> and complete your
+                <strong class="kw">gym booking</strong> online. Choose from <strong class="kw">morning yoga</strong>,
+                <strong class="kw">HIIT workout</strong>, and <strong class="kw">pilates class</strong> sessions led by certified trainers.
+            </p>
+            <div class="filter-bar" role="group" aria-label="Filter Fitness Classes by Keyword">
+                <button type="button" class="filter-btn active" data-filter="all" onclick="filterClasses('all', this)">All Fitness Classes</button>
+                <button type="button" class="filter-btn" data-filter="yoga" onclick="filterClasses('yoga', this)">Morning Yoga / Yoga Classes</button>
+                <button type="button" class="filter-btn" data-filter="hiit" onclick="filterClasses('hiit', this)">HIIT Workout</button>
+                <button type="button" class="filter-btn" data-filter="pilates" onclick="filterClasses('pilates', this)">Core Pilates Class</button>
+            </div>
+        </div>
+
         <div class="class-list" id="classList">
             <!-- Classes injected by JS -->
         </div>
@@ -46,23 +60,31 @@
     <footer>
         <div class="counter-bar" aria-label="Website Visitor Counters">
             <div class="counter-item">
-                <span class="counter-label">Custom JS Counter (Write Your Own):</span>
-                <strong id="customTotalVisits">0</strong> total visits
-                <span class="counter-sub">(<span id="customPageVisits">0</span> on this page)</span>
+                <span class="counter-label">Custom JS Counter:</span>
+                <button type="button" class="counter-pill-btn" onclick="incrementCustomCounter()" title="Click to add +1 visit locally">
+                    <strong id="customTotalVisits">0</strong> visits
+                    <span class="counter-sub">(<span id="customPageVisits">0</span> this page)</span>
+                    <span class="pill-tag">+1</span>
+                </button>
                 <button type="button" class="counter-reset-btn" onclick="resetCustomCounter()">Reset</button>
             </div>
             <div class="counter-item">
                 <span class="counter-label">API Counter (REST API):</span>
-                <strong id="apiGlobalVisits">Loading...</strong> global views
+                <button type="button" class="counter-pill-btn api-btn" id="apiCounterBtn" onclick="hitApiCounter(true)" title="Click to send a live API request (+1 global view)">
+                    <strong id="apiGlobalVisits">Loading...</strong> global views
+                    <span class="pill-tag">+1 API</span>
+                </button>
             </div>
             <div class="counter-item">
-                <span class="counter-label">Yandex.Metrika (metrika.yandex.ru):</span>
-                <strong id="yandexStatus">Active (ID: 114398340)</strong>
+                <span class="counter-label">Yandex.Metrika:</span>
+                <a class="counter-pill-link" id="yandexStatus" href="https://metrika.yandex.ru/dashboard?id=114398340" target="_blank" rel="noopener noreferrer" title="Open Yandex.Metrika Analytics Dashboard">
+                    Active (ID: 114398340) ↗
+                </a>
             </div>
         </div>
         <p>&copy; 2026 FitLife Cloud Fitness Platform. Designed by Zhou Xiaoweiran.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=4"></script>
 </body>
 </html>
