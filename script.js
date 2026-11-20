@@ -68,9 +68,7 @@ function initCustomCounter() {
 }
 
 function resetCustomCounter() {
-    const pageName = document.body.getAttribute('data-page') || 'home';
     localStorage.removeItem('fitlife_custom_total_visits');
-    localStorage.removeItem(`fitlife_custom_visits_${pageName}`);
     localStorage.removeItem('fitlife_custom_visits_home');
     localStorage.removeItem('fitlife_custom_visits_classes');
     localStorage.removeItem('fitlife_custom_visits_dashboard');
