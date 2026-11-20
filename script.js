@@ -1,3 +1,6 @@
+// ==========================================
+// 1. FitLife Class Booking Logic
+// ==========================================
 const classesData = [
     { id: 'c1', name: 'Morning Yoga', time: '08:00 AM', trainer: 'Alice', capacity: 15, available: 5 },
     { id: 'c2', name: 'HIIT Extreme', time: '06:00 PM', trainer: 'Bob', capacity: 20, available: 0 },
@@ -31,7 +34,7 @@ function renderClasses() {
 
 function bookClass(id, name, time) {
     let bookings = JSON.parse(localStorage.getItem('fitlife_bookings') || '[]');
-    if(bookings.find(b => b.id === id)) {
+    if (bookings.find(b => b.id === id)) {
         alert("You have already booked this class!");
         return;
     }
@@ -39,8 +42,84 @@ function bookClass(id, name, time) {
     localStorage.setItem('fitlife_bookings', JSON.stringify(bookings));
     alert(`Successfully reserved: ${name}\nGo to My Dashboard to view your pass.`);
     const cls = classesData.find(c => c.id === id);
-    if(cls) cls.available--;
+    if (cls) cls.available--;
     renderClasses();
 }
 
-document.addEventListener('DOMContentLoaded', renderClasses);
+// ==========================================
+// 2. Visitor Counter Method 1: Write Your Own
+//    (Custom JavaScript + localStorage)
+// ==========================================
+function initCustomCounter() {
+    const pageName = document.body.getAttribute('data-page') || 'home';
+    const totalKey = 'fitlife_custom_total_visits';
+    const pageKey = `fitlife_custom_visits_${pageName}`;
+
+    let totalVisits = parseInt(localStorage.getItem(totalKey) || '0', 10) + 1;
+    let pageVisits = parseInt(localStorage.getItem(pageKey) || '0', 10) + 1;
+
+    localStorage.setItem(totalKey, String(totalVisits));
+    localStorage.setItem(pageKey, String(pageVisits));
+
+    const totalEl = document.getElementById('customTotalVisits');
+    const pageEl = document.getElementById('customPageVisits');
+    if (totalEl) totalEl.textContent = totalVisits;
+    if (pageEl) pageEl.textContent = pageVisits;
+}
+
+function resetCustomCounter() {
+    const pageName = document.body.getAttribute('data-page') || 'home';
+    localStorage.removeItem('fitlife_custom_total_visits');
+    localStorage.removeItem(`fitlife_custom_visits_${pageName}`);
+    localStorage.removeItem('fitlife_custom_visits_home');
+    localStorage.removeItem('fitlife_custom_visits_classes');
+    localStorage.removeItem('fitlife_custom_visits_dashboard');
+
+    const totalEl = document.getElementById('customTotalVisits');
+    const pageEl = document.getElementById('customPageVisits');
+    if (totalEl) totalEl.textContent = '0';
+    if (pageEl) pageEl.textContent = '0';
+}
+
+// ==========================================
+// 3. Visitor Counter Method 2: Use API
+//    (A: Live REST Counter API + B: Yandex.Metrika)
+// ==========================================
+async function initApiCounter() {
+    const apiEl = document.getElementById('apiGlobalVisits');
+    if (!apiEl) return;
+
+    const endpoint = 'https://api.counterapi.dev/v1/zxwr1997-fitlife/visits/up';
+    try {
+        const response = await fetch(endpoint);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        apiEl.textContent = typeof data.count === 'number' ? data.count : 'N/A';
+    } catch (error) {
+        console.warn('Counter API unavailable:', error);
+        apiEl.textContent = 'Offline';
+    }
+}
+
+function updateYandexStatus() {
+    const yandexEl = document.getElementById('yandexStatus');
+    if (!yandexEl) return;
+
+    if (window.YANDEX_METRIKA_ID && window.YANDEX_METRIKA_ID !== 0) {
+        yandexEl.textContent = `Active (ID: ${window.YANDEX_METRIKA_ID})`;
+        yandexEl.style.color = '#2ecc71';
+    } else {
+        yandexEl.textContent = 'Ready (Set ID from metrika.yandex.ru)';
+        yandexEl.style.color = '#f1c40f';
+    }
+}
+
+// ==========================================
+// 4. Initialize All Modules
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    renderClasses();
+    initCustomCounter();
+    initApiCounter();
+    updateYandexStatus();
+});
