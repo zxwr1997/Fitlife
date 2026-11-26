@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member Dashboard & QR Gym Pass | FitLife Fitness</title>
-    <meta name="description" content="Manage your upcoming gym class reservations and access your dynamic QR code gym pass on the FitLife member dashboard.">
-    <link rel="stylesheet" href="style.css?v=4">
+    <title>Member Dashboard, Saved Macro Plan &amp; QR Gym Pass | FitLife Fitness</title>
+    <meta name="description" content="Manage your upcoming gym class reservations, view your saved daily calorie &amp; macro nutrition target, and access your dynamic QR code gym pass.">
+    <link rel="stylesheet" href="style.css?v=5">
     <!-- Yandex.Metrika counter (https://metrika.yandex.ru) -->
     <script type="text/javascript">
         window.YANDEX_METRIKA_ID = 114398340;
@@ -31,6 +31,7 @@
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="classes.html">Book Class</a></li>
+            <li><a href="tools.html">Fitness Tools</a></li>
             <li><a href="dashboard.html" class="active">My Dashboard</a></li>
         </ul>
     </nav>
@@ -41,7 +42,8 @@
             <h1>FitLife Member Dashboard &amp; <span class="kw-title">Smart QR Code Gym Access</span></h1>
             <p class="page-intro">
                 Manage your active <strong class="kw">gym membership</strong>, review your
-                <strong class="kw">online fitness class booking</strong> schedule, and scan your digital pass for contactless entry.
+                <strong class="kw">online fitness class booking</strong> schedule, check your saved
+                <strong class="kw">daily macro nutrition target</strong>, and scan your digital pass for contactless entry.
             </p>
             <p>Membership Status: <span class="badge">Active</span></p>
         </div>
@@ -54,6 +56,16 @@
                     <li>No upcoming classes. <a href="classes.html" class="inline-link">Book a fitness class now &rarr;</a></li>
                 </ul>
             </div>
+
+            <div class="card">
+                <span class="card-tag">Saved Nutrition Plan</span>
+                <h2>My Daily Macro Target</h2>
+                <div id="savedMacroSummary" class="saved-macro-box">
+                    <p class="small-text">No macro plan saved yet. Use our free calculator to generate and save your daily protein, carb, and calorie targets.</p>
+                    <a href="tools.html#macro-tool" class="inline-link" style="display:inline-block;margin-top:0.8rem;">Open Macro Calculator &rarr;</a>
+                </div>
+            </div>
+
             <div class="card qr-card">
                 <span class="card-tag">Contactless Turnstile Pass</span>
                 <h2>Smart QR Code Gym Access Pass</h2>
@@ -99,18 +111,6 @@
         <p>&copy; 2026 FitLife Cloud Fitness Platform. Designed by Zhou Xiaoweiran.</p>
     </footer>
 
-    <script src="script.js?v=4"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const bookings = JSON.parse(localStorage.getItem('fitlife_bookings') || '[]');
-            const list = document.getElementById('myBookingsList');
-            if (bookings.length > 0) {
-                list.innerHTML = '';
-                bookings.forEach(b => {
-                    list.innerHTML += `<li><strong>${b.name}</strong> - ${b.time} <span class="badge green">Confirmed</span></li>`;
-                });
-            }
-        });
-    </script>
+    <script src="script.js?v=5"></script>
 </body>
 </html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fitness Tools | Calorie &amp; Macro Calculator &amp; HIIT Timer - FitLife</title>
+    <meta name="description" content="Use FitLife's free Daily Calorie &amp; Macro Calculator with real food portions and our Interactive HIIT &amp; Rest Interval Timer with class presets and audio cues.">
+    <link rel="stylesheet" href="style.css?v=5">
+    <!-- Yandex.Metrika counter (https://metrika.yandex.ru) -->
+    <script type="text/javascript">
+        window.YANDEX_METRIKA_ID = 114398340;
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(114398340, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/114398340" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+<body data-page="tools">
+    <nav class="navbar">
+        <div class="logo">FitLife Gym</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="classes.html">Book Class</a></li>
+            <li><a href="tools.html" class="active">Fitness Tools</a></li>
+            <li><a href="dashboard.html">My Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="page-banner">
+            <span class="card-tag">Free Interactive Fitness Utilities</span>
+            <h1>FitLife <span class="kw-title">Daily Calorie &amp; Macro Calculator</span> &amp; <span class="kw-title">HIIT Interval Timer</span></h1>
+            <p class="page-intro">
+                Practical tools built for real training days: calculate your personalized <strong class="kw">daily calorie &amp; macro targets</strong>
+                with real-food meal equivalents, or pace your <strong class="kw">HIIT workout</strong> and rest sets with our audio-guided
+                <strong class="kw">workout interval timer</strong>—no login required.
+            </p>
+            <div class="topic-pills">
+                <a href="#macro-tool" class="topic-pill long">1. Daily Calorie &amp; Macro Calculator</a>
+                <a href="#interval-tool" class="topic-pill long">2. Interactive HIIT &amp; Rest Interval Timer</a>
+            </div>
+        </div>
+
+        <div class="tools-grid">
+            <!-- TOOL 1: Daily Calorie & Macro Calculator with Food Equivalents & Dashboard Sync -->
+            <section class="tool-card" id="macro-tool" aria-labelledby="macroToolHeading">
+                <div class="tool-header">
+                    <span class="card-tag">Utility 01 • Nutrition Planner</span>
+                    <h2 id="macroToolHeading">Daily Calorie &amp; Macro Calculator</h2>
+                    <p class="tool-subtitle">
+                        Unlike generic BMI calculators, FitLife converts your <strong class="kw">TDEE &amp; macro split</strong>
+                        into practical daily food portions and recommends matching <strong class="kw">FitLife fitness classes</strong>.
+                    </p>
+                </div>
+
+                <form id="macroForm" class="tool-form" onsubmit="event.preventDefault(); calculateMacros();">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="macroGender">Gender</label>
+                            <select id="macroGender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="macroAge">Age (years)</label>
+                            <input type="number" id="macroAge" value="23" min="14" max="85" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="macroHeight">Height (cm)</label>
+                            <input type="number" id="macroHeight" value="175" min="120" max="230" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="macroWeight">Weight (kg)</label>
+                            <input type="number" id="macroWeight" value="68" min="35" max="220" step="0.5" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="macroActivity">Weekly Activity Level</label>
+                            <select id="macroActivity">
+                                <option value="1.2">Sedentary (Desk / Study, 0 workouts)</option>
+                                <option value="1.375" selected>Lightly Active (1–3 classes/week)</option>
+                                <option value="1.55">Moderately Active (3–5 classes/week)</option>
+                                <option value="1.725">Very Active (6–7 intense sessions/week)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="macroGoal">Fitness Goal</label>
+                            <select id="macroGoal">
+                                <option value="cut">Fat Loss (-400 kcal deficit)</option>
+                                <option value="maintain" selected>Body Recomp / Maintain</option>
+                                <option value="bulk">Lean Muscle Gain (+300 kcal surplus)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn tool-primary-btn">Calculate My Macros &amp; Food Guide</button>
+                </form>
+
+                <div id="macroResultBox" class="tool-result-box" aria-live="polite">
+                    <div class="result-kpi-row">
+                        <div class="kpi-pill">
+                            <span class="kpi-label">Daily Target</span>
+                            <strong class="kpi-value" id="resCalories">2,226 kcal</strong>
+                            <span class="kpi-sub" id="resBmr">BMR: 1,619 kcal</span>
+                        </div>
+                        <div class="kpi-pill">
+                            <span class="kpi-label">Protein</span>
+                            <strong class="kpi-value" id="resProtein">122 g</strong>
+                            <span class="kpi-sub" id="resChicken">≈ 610g chicken breast</span>
+                        </div>
+                        <div class="kpi-pill">
+                            <span class="kpi-label">Carbs</span>
+                            <strong class="kpi-value" id="resCarbs">296 g</strong>
+                            <span class="kpi-sub" id="resRice">≈ 1,138g cooked rice</span>
+                        </div>
+                        <div class="kpi-pill">
+                            <span class="kpi-label">Healthy Fats</span>
+                            <strong class="kpi-value" id="resFat">62 g</strong>
+                            <span class="kpi-sub" id="resOlive">≈ 4.5 tbsp olive oil/nuts</span>
+                        </div>
+                    </div>
+
+                    <div class="tool-tip-card" id="resClassAdvice">
+                        <strong>Recommended FitLife Class Pair:</strong> Balance strength &amp; cardio with 2x Core Pilates and 1x Morning Yoga per week.
+                    </div>
+
+                    <div class="tool-actions">
+                        <button type="button" class="filter-btn active" onclick="saveMacrosToDashboard()">Save Plan to My Dashboard</button>
+                        <span id="macroSaveStatus" class="save-feedback"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TOOL 2: Interactive HIIT & Rest Interval Timer with Presets & Web Audio Beep -->
+            <section class="tool-card" id="interval-tool" aria-labelledby="timerToolHeading">
+                <div class="tool-header">
+                    <span class="card-tag">Utility 02 • Live Workout Pacer</span>
+                    <h2 id="timerToolHeading">Interactive HIIT &amp; Rest Interval Timer</h2>
+                    <p class="tool-subtitle">
+                        Built-in <strong class="kw">Tabata, HIIT &amp; rest timer</strong> with Web Audio countdown beeps and
+                        one-click presets matched to <strong class="kw">FitLife studio classes</strong>.
+                    </p>
+                </div>
+
+                <div class="preset-bar" role="group" aria-label="Workout Timer Presets">
+                    <button type="button" class="filter-btn active" onclick="applyTimerPreset(20, 10, 8, 'Tabata Sprint (20s/10s)', this)">Tabata (20s / 10s)</button>
+                    <button type="button" class="filter-btn" onclick="applyTimerPreset(40, 20, 6, 'HIIT Extreme Class (40s/20s)', this)">HIIT Extreme (40s / 20s)</button>
+                    <button type="button" class="filter-btn" onclick="applyTimerPreset(45, 15, 5, 'Core Pilates Hold (45s/15s)', this)">Core Pilates (45s / 15s)</button>
+                    <button type="button" class="filter-btn" onclick="applyTimerPreset(60, 30, 4, 'Strength Rest Pacer (60s/30s)', this)">Strength Set (60s / 30s)</button>
+                </div>
+
+                <div class="form-row timer-inputs">
+                    <div class="form-group">
+                        <label for="timerWorkSec">Work (sec)</label>
+                        <input type="number" id="timerWorkSec" value="20" min="5" max="300">
+                    </div>
+                    <div class="form-group">
+                        <label for="timerRestSec">Rest (sec)</label>
+                        <input type="number" id="timerRestSec" value="10" min="5" max="300">
+                    </div>
+                    <div class="form-group">
+                        <label for="timerRounds">Rounds</label>
+                        <input type="number" id="timerRounds" value="8" min="1" max="30">
+                    </div>
+                </div>
+
+                <div class="timer-display-panel phase-ready" id="timerPanel">
+                    <div class="timer-phase-badge" id="timerPhaseLabel">READY • TABATA SPRINT (20S/10S)</div>
+                    <div class="timer-clock" id="timerClockDisplay">00:20</div>
+                    <div class="timer-round-meta" id="timerRoundDisplay">Round 1 of 8 • Sound Alerts Enabled</div>
+                    <div class="timer-progress-track">
+                        <div class="timer-progress-fill" id="timerProgressBar" style="width: 100%;"></div>
+                    </div>
+                </div>
+
+                <div class="timer-controls">
+                    <button type="button" class="btn timer-start-btn" id="timerStartBtn" onclick="startIntervalTimer()">Start Workout</button>
+                    <button type="button" class="filter-btn" id="timerPauseBtn" onclick="pauseIntervalTimer()">Pause</button>
+                    <button type="button" class="filter-btn" onclick="resetIntervalTimer()">Reset</button>
+                    <label class="sound-toggle">
+                        <input type="checkbox" id="timerSoundToggle" checked> Audio Beep
+                    </label>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="counter-bar" aria-label="Website Visitor Counters">
+            <div class="counter-item">
+                <span class="counter-label">Custom JS Counter:</span>
+                <button type="button" class="counter-pill-btn" onclick="incrementCustomCounter()" title="Click to add +1 visit locally">
+                    <strong id="customTotalVisits">0</strong> visits
+                    <span class="counter-sub">(<span id="customPageVisits">0</span> this page)</span>
+                    <span class="pill-tag">+1</span>
+                </button>
+                <button type="button" class="counter-reset-btn" onclick="resetCustomCounter()">Reset</button>
+            </div>
+            <div class="counter-item">
+                <span class="counter-label">API Counter (REST API):</span>
+                <button type="button" class="counter-pill-btn api-btn" id="apiCounterBtn" onclick="hitApiCounter(true)" title="Click to send a live API request (+1 global view)">
+                    <strong id="apiGlobalVisits">Loading...</strong> global views
+                    <span class="pill-tag">+1 API</span>
+                </button>
+            </div>
+            <div class="counter-item">
+                <span class="counter-label">Yandex.Metrika:</span>
+                <a class="counter-pill-link" id="yandexStatus" href="https://metrika.yandex.ru/dashboard?id=114398340" target="_blank" rel="noopener noreferrer" title="Open Yandex.Metrika Analytics Dashboard">
+                    Active (ID: 114398340) ↗
+                </a>
+            </div>
+        </div>
+        <p>&copy; 2026 FitLife Cloud Fitness Platform. Designed by Zhou Xiaoweiran.</p>
+    </footer>
+
+    <script src="script.js?v=5"></script>
+</body>
+</html>
