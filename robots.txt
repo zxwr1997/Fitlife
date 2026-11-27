@@ -1,14 +1,14 @@
 # robots.txt for FitLife Cloud Fitness Platform
-# Domain: https://zxwr1997.github.io/
+# Domain: https://zxwr1997.github.io/Fitlife/
 
 User-agent: *
-Allow: /
-Allow: /index.html
-Allow: /classes.html
-Allow: /tools.html
-Allow: /dashboard.html
-Allow: /style.css
-Allow: /script.js
+Allow: /Fitlife/
+Allow: /Fitlife/index.html
+Allow: /Fitlife/classes.html
+Allow: /Fitlife/tools.html
+Allow: /Fitlife/dashboard.html
+Allow: /Fitlife/style.css
+Allow: /Fitlife/script.js
 
 # Sitemap location
-Sitemap: https://zxwr1997.github.io/sitemap.xml
+Sitemap: https://zxwr1997.github.io/Fitlife/sitemap.xml
